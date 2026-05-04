@@ -13,9 +13,9 @@ $app = new Laravel\Lumen\Application(
 );
 
 $app->withFacades();
-$app->withEloquent();
 
 $app->configure('app');
+$app->configure('geoip');
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,

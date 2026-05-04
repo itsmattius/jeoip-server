@@ -37,6 +37,31 @@ class ApiController extends Controller
         }
     }
 
+    public function json(?string $ip = null)
+    {
+        try {
+            if ($ip === null) {
+                $ip = request()->ip();
+            }
+
+            /**
+             * @var array{string,mixed}
+             */
+            $data = $this->goeIPService->query($ip)->jsonSerialize();
+            $data['user_agent'] = request()->userAgent();
+            $data['hostname'] = \gethostbyaddr($ip);
+            $data['status'] = true;
+
+            return response()->json($data, 200, [], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        } catch (IQueryException $e) {
+            return response()->json([
+                'status' => false,
+                'query' => $e->getQuery(),
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
     /**
      * @return string
      */

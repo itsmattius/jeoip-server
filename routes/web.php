@@ -16,5 +16,5 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/{ip}/country', ['as' => 'ip.country', 'uses' => ApiController::class.'@country']);
     Route::get('/{ip}/city', ['as' => 'ip.city', 'uses' => ApiController::class.'@city']);
     Route::get('/{ip}/asn', ['as' => 'ip.asn', 'uses' => ApiController::class.'@asn']);
-    Route::get('/{ip}/json', ['as' => 'ip.json', 'uses' => ApiController::class . '@query']);
+    Route::get('/{ip}/json', ['as' => 'ip.json', 'uses' => ApiController::class . '@json']);
 });
