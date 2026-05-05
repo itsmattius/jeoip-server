@@ -28,6 +28,9 @@ $app->singleton(
 
 $app->register(Jeoip\Server\AppServiceProvider::class);
 $app->register(Jeoip\Ip2Location\GeoIPServiceProvider::class);
-$app->middleware(Jeoip\Server\Http\Middleware\CorsMiddleware::class);
+$app->middleware([
+    Jeoip\Server\Http\Middleware\TrustProxies::class,
+    Jeoip\Server\Http\Middleware\CorsMiddleware::class,
+]);
 
 return $app;
